@@ -7,12 +7,14 @@ class htcondorce (
     if $backend_scheduler =~ /^slurm$/ {
         package { "gratia-probe-slurm": ensure => present }
         package { "osg-configure-slurm" : ensure => present }
-        $backend_scheduler = "pbs"
+        $real_backend_scheduler = "pbs"
+    } else {
+        $real_backend_scheduler = $backend_scheduler
     }
 
-    validate_re($backend_scheduler, [ '^pbs$', '^condor$', '^lsf$', '^sge$' ], "Error, backend_scheduler must be either pbs, condor, lsf, or sge.  Is actually ${backend_scheduler}")
+    validate_re($real_backend_scheduler, [ '^pbs$', '^condor$', '^lsf$', '^sge$' ], "Error, backend_scheduler must be either pbs, condor, lsf, or sge.  Is actually ${real_backend_scheduler}")
     
-    package { "osg-ce-${backend_scheduler}": 
+    package { "osg-ce-${real_backend_scheduler}": 
       ensure => present
     }
 
