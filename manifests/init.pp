@@ -10,7 +10,7 @@ class htcondorce (
         $backend_scheduler = "pbs"
     }
 
-    validate_re($backend_scheduler, [ '^pbs$', '^condor$', '^lsf$', '^sge$' ], "Error, backend_scheduler must be either pbs, condor, lsf, or sge")
+    validate_re($backend_scheduler, [ '^pbs$', '^condor$', '^lsf$', '^sge$' ], "Error, backend_scheduler must be either pbs, condor, lsf, or sge.  Is actually ${backend_scheduler}")
     
     package { "osg-ce-${backend_scheduler}": 
       ensure => present
