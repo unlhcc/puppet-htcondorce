@@ -1,5 +1,5 @@
 class htcondorce::config {
-  $require = class["htcondorce::install"]
+  #$require = class["htcondorce::install"]
 #file { 'osg':
 #  path    => '/etc/osg',
 #  ensure  => directory,
@@ -11,8 +11,8 @@ class htcondorce::config {
 #  mode    => '0644',
 #  source  => 'puppet:///modules/htcondorce/osg',
 #}
-  file { '/etc/gratia/slurm/ProbeConfig':
-    ensure  => present,
+  file { 'ProbeConfig':
+    ensure  => file,
     path    => '/etc/gratia/slurm/ProbeConfig',
     owner   => 'root',
     group   => 'root',
