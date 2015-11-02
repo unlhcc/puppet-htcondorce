@@ -11,10 +11,12 @@ class htcondorce::config {
 #  mode    => '0644',
 #  source  => 'puppet:///modules/htcondorce/osg',
 #}
-  file { "ProbeConfig":
+  file { '/etc/gratia/slurm/ProbeConfig':
     ensure  => present,
-    path    => "/etc/gratia/slurm/ProbeConfig",
-    owner   => "root", group => "root", mode => '0644',
+    path    => '/etc/gratia/slurm/ProbeConfig',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
     content => template("osg_ce/ProbeConfig.erb"),
     require => Package["gratia-probe-slurm"],
   }
