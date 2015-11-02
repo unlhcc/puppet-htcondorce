@@ -17,7 +17,7 @@ class htcondorce::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('htcondorce/ProbeConfig.erb),
+    content => template('htcondorce/ProbeConfig.erb'),
     require => Package['gratia-probe-slurm'],
   }
 
