@@ -17,8 +17,8 @@ class htcondorce::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("osg_ce/ProbeConfig.erb"),
-    require => Package["gratia-probe-slurm"],
+    content => template('htcondorce/ProbeConfig.erb),
+    require => Package['gratia-probe-slurm'],
   }
 
 file { '10-gateway.ini':
