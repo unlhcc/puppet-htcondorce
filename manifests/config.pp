@@ -1,15 +1,34 @@
 class htcondorce::config {
+  $require = class["htcondorce::install"]
+#file { 'osg':
+#  path    => '/etc/osg',
+#  ensure  => directory,
+#  recurse => true,
+#  purge   => true,
+#  force   => true,
+#  owner   => 'root',
+#  group   => 'root',
+#  mode    => '0644',
+#  source  => 'puppet:///modules/htcondorce/osg',
+#}
+  file { "ProbeConfig":
+    ensure  => present,
+    path    => "/etc/gratia/slurm/ProbeConfig",
+    owner   => "root", group => "root", mode => '0644',
+    content => template("osg_ce/ProbeConfig.erb"),
+    require => Package["gratia-probe-slurm"],
+  }
 
-file { 'osg':
-  path    => '/etc/osg',
-  ensure  => directory,
+file { '10-gateway.ini':
+  path    => '/etc/osg/config.d/10-gateway.ini',
+  ensure  => present,
   recurse => true,
   purge   => true,
   force   => true,
   owner   => 'root',
   group   => 'root',
   mode    => '0644',
-  source  => 'puppet:///modules/htcondorce/osg',
+  source  => 'puppet:///modules/htcondorce/osg/config.d/10-gateway.ini',
 }
 
 
@@ -54,13 +73,13 @@ file { 'osg':
   #  notify  => Service['condor-ce'],
   #}
 
-  #file { 'condor-ce-hcc-config':
-  #  ensure  => present,
-  #  name    => '/etc/condor-ce/config.d/09-hcc-tuning.conf',
-  #  owner   => 'root',
-  #  group   => 'root',
-  #  mode    => '0644',
-  #  source  => 'puppet:///modules/osg_ce_condor/09-hcc-tuning.conf',
+  file { 'condor-ce-hcc-config':
+    ensure  => present,
+    path    => '/etc/condor-ce/config.d/09-hcc-tuning.conf',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/htcondorce/condor-ce/condig.d/09-hcc-tuning.conf',
   #  notify  => Service['condor-ce'],
   #}
 
@@ -94,7 +113,7 @@ file { 'osg':
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/osg_ce_condor/pbs_local_submit_attributes.sh',
+    source  => 'puppet:///modules/htcondorce/pbs_local_submit_attributes.sh',
   }
 
   file { '/usr/libexec/blahp/pbs_local_submit_attributes.sh':
