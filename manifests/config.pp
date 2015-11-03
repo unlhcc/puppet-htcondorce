@@ -24,9 +24,9 @@ class htcondorce::config {
 file { '10-gateway.ini':
   path    => '/etc/osg/config.d/10-gateway.ini',
   ensure  => present,
-  recurse => true,
-  purge   => true,
-  force   => true,
+  #recurse => true,
+  #purge   => true,
+  #force   => true,
   owner   => 'root',
   group   => 'root',
   mode    => '0644',
