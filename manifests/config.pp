@@ -30,7 +30,7 @@ file { '10-gateway.ini':
   owner   => 'root',
   group   => 'root',
   mode    => '0644',
-  source  => 'puppet:///modules/htcondorce/osg/config.d/10-gateway.ini',
+  source  => 'puppet:///modules/htcondorce/10-gateway.ini',
 }
 
 
