@@ -24,9 +24,6 @@ class htcondorce::config {
 file { '10-gateway.ini':
   path    => '/etc/osg/config.d/10-gateway.ini',
   ensure  => present,
-  #recurse => true,
-  #purge   => true,
-  #force   => true,
   owner   => 'root',
   group   => 'root',
   mode    => '0644',
@@ -62,7 +59,7 @@ file { '10-gateway.ini':
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/condor-ce',
-  #  notify  => Service['condor-ce'],
+    notify  => Service['condor-ce'],
   }
 
   #file { 'condor-ce-rms-config':
