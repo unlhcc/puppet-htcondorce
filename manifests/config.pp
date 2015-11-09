@@ -1,5 +1,5 @@
 class htcondorce::config {
-  #$require = class["htcondorce::install"]
+  $require => class["htcondorce::install"]
 #file { 'osg':
 #  path    => '/etc/osg',
 #  ensure  => directory,
@@ -27,7 +27,7 @@ file { '10-gateway.ini':
   owner   => 'root',
   group   => 'root',
   mode    => '0644',
-  source  => 'puppet:///modules/htcondorce/10-gateway.ini',
+  source  => 'puppet:///modules/htcondorce/osg/config.d/10-gateway.ini',
 }
 
 
@@ -59,7 +59,7 @@ file { '10-gateway.ini':
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/condor-ce',
-    notify  => Service['condor-ce'],
+    notify  => Service['condor-ce']
   }
 
   #file { 'condor-ce-rms-config':
