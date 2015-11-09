@@ -1,5 +1,5 @@
 class htcondorce::config {
-  $require = class["htcondorce::install"]
+  #$require = class["htcondorce::install"]
 #file { 'osg':
 #  path    => '/etc/osg',
 #  ensure  => directory,
