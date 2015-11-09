@@ -68,7 +68,7 @@
     SlurmDbUser="slurm"
     SlurmDbPasswordFile="/etc/gratia/slurm/pwfile"
     SlurmDbName="slurm_acct_db"
-    SlurmCluster="<%= scope.lookupvar('htcondorce::cluster_name').downcase %>"
+    SlurmCluster="<%= scope.lookupvar('htcondorce::cluster_name') %>"
 
 />
 
