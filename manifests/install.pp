@@ -2,6 +2,7 @@ class htcondorce::install (
 ) {
     file {"RPM-GPG-KEY-OSG":
       ensure      => present,
+      path        => "/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG",
     }
     exec {"update osg":
       path        => "/bin:/usr/bin:/sbin:/usr/sbin",
