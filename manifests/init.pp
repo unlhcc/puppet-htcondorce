@@ -3,7 +3,9 @@ class htcondorce (
   $squid = $htcondorce::params::squid,
   $backend_scheduler = $htcondorce::params::backend_scheduler,
   ) inherits htcondorce::params {
-    
+
+    include htcondorce::install, htcondorce::config, htcondorce::service
+
     if $backend_scheduler =~ /^slurm$/ {
         package { "gratia-probe-slurm": ensure => present }
         package { "osg-configure-slurm" : ensure => present }
@@ -13,12 +15,12 @@ class htcondorce (
     }
 
     validate_re($real_backend_scheduler, [ '^pbs$', '^condor$', '^lsf$', '^sge$' ], "Error, backend_scheduler must be either pbs, condor, lsf, or sge.  Is actually ${real_backend_scheduler}")
-    
-    package { "osg-ce-${real_backend_scheduler}": 
+
+    package { "osg-ce-${real_backend_scheduler}":
       ensure => present
     }
 
-    
-    
+
+
 
 }
