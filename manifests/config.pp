@@ -22,8 +22,8 @@ class htcondorce::config {
   }
 
 file { '10-gateway.ini':
-  path    => '/etc/osg/config.d/10-gateway.ini',
   ensure  => file,
+  path    => '/etc/osg/config.d/10-gateway.ini',
   owner   => 'root',
   group   => 'root',
   mode    => '0644',
@@ -49,18 +49,18 @@ file { '10-gateway.ini':
     source  => 'puppet:///modules/htcondorce/blah.config',
   }
 
-  file { 'condor-ce':
-    path    => '/etc/condor-ce'
-    ensure  => directory,
-    recurse => true,
-    purge   => true,
-    force   => true,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/htcondorce/condor-ce',
-    notify  => Service['condor-ce']
-  }
+  #file { 'condor-ce':
+#    path    => '/etc/condor-ce'
+#    ensure  => directory,
+#    recurse => true,
+#    purge   => true,
+#    force   => true,
+#    owner   => 'root',
+#    group   => 'root',
+#    mode    => '0644',
+#    source  => 'puppet:///modules/htcondorce/condor-ce',
+#    notify  => Service['condor-ce']
+#  }
 
   #file { 'condor-ce-rms-config':
   #  ensure  => present,
@@ -79,8 +79,8 @@ file { '10-gateway.ini':
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/condor-ce/condig.d/09-hcc-tuning.conf',
-  #  notify  => Service['condor-ce'],
-  #}
+    notify  => Service['condor-ce'],
+  }
 
   #file { '/etc/condor-ce/condor_mapfile':
   #  ensure  => present,
