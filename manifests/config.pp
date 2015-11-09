@@ -79,7 +79,7 @@ file { '10-gateway.ini':
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/condor-ce/condig.d/09-hcc-tuning.conf',
-    notify  => Service['condor-ce'],
+    #notify  => Service['condor-ce'],
   }
 
   #file { '/etc/condor-ce/condor_mapfile':
