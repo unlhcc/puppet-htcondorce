@@ -23,7 +23,7 @@ class htcondorce::config {
 
 file { '10-gateway.ini':
   path    => '/etc/osg/config.d/10-gateway.ini',
-  ensure  => present,
+  ensure  => file,
   owner   => 'root',
   group   => 'root',
   mode    => '0644',
@@ -42,7 +42,7 @@ file { '10-gateway.ini':
 
   file { 'blah.config':
     path    => '/etc/blah.config',
-    ensure  => present,
+    ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
