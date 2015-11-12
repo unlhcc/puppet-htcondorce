@@ -12,7 +12,7 @@ class htcondorce::hostcert {
     group => "root",
     mode => "0644",
     show_diff => false,
-		source  => "puppet://hostcert/${hostname}-hostcert.pem",
+		source  => "puppet:///hostcert/${hostname}-hostcert.pem",
 	}
   file { "hostkey.pem":
 		path    => "/etc/grid-security/hostkey.pem",
@@ -21,7 +21,7 @@ class htcondorce::hostcert {
     group => "root",
     mode => "0600",
     show_diff => false,
-		source  => "puppet://hostcert/${hostname}-hostkey.pem",
+		source  => "puppet:///hostcert/${hostname}-hostkey.pem",
 	}
 
 }
