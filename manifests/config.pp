@@ -1,16 +1,5 @@
 class htcondorce::config {
-  #$require = class["htcondorce::install"]
-#file { 'osg':
-#  path    => '/etc/osg',
-#  ensure  => directory,
-#  recurse => true,
-#  purge   => true,
-#  force   => true,
-#  owner   => 'root',
-#  group   => 'root',
-#  mode    => '0644',
-#  source  => 'puppet:///modules/htcondorce/osg',
-#}
+
   file { 'ProbeConfig':
     ensure  => file,
     path    => '/etc/gratia/slurm/ProbeConfig',
@@ -21,15 +10,86 @@ class htcondorce::config {
     require => Package['gratia-probe-slurm'],
   }
 
-file { '10-gateway.ini':
-  ensure  => file,
-  path    => '/etc/osg/config.d/10-gateway.ini',
-  owner   => 'root',
-  group   => 'root',
-  mode    => '0644',
-  source  => 'puppet:///modules/htcondorce/osg/config.d/10-gateway.ini',
-}
+  file { '01-squid.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/01-squid.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('htcondorce/osg/config.d/01-squid.ini.erb'),
+  }
 
+  file { '10-gateway.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/10-gateway.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/htcondorce/osg/config.d/10-gateway.ini',
+  }
+
+  file { '20-pbs.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/20-pbs.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('htcondorce/osg/config.d/20-pbs.ini.erb'),
+  }
+
+  file { '30-gip.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/30-gip.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/htcondorce/osg/config.d/30-gip.ini',
+  }
+
+  file { '30-infoservices.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/30-infoservices.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/htcondorce/osg/config.d/30-infoservices.ini',
+  }
+
+  file { 'user-vo-map':
+    ensure  => file,
+    path    => '/var/lib/osg/user-vo-map',
+  }
+
+  exec {"gums-host-cron":
+    path        => "/usr/bin",
+    command     => "gums-host-cron",
+    subscribe   => File["/var/lib/osg/user-vo-map"],
+    refreshonly => true,
+    logoutput   => "on_failure",
+  }
+
+  file { '40-siteinfo.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/40-siteinfo.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('htcondorce/osg/config.d/40-siteinfo.erb'),
+  }
+
+  file { 'osg-job-environment.conf':
+    ensure  => file,
+    path    => '/var/lib/osg/osg-job-environment.conf',
+  }
+
+  exec {"osg-configure":
+    path        => "/usr/sbin",
+    command     => "osg-configure -c",
+    subscribe   => File["/var/lib/osg/osg-job-environment.conf"],
+    refereshonly  => true,
+    onlyif      => "osg-configure -v",
+    logoutput   => "on_failure",
+  }
 
   # Also in osg_ce
   #file { '/etc/gums/gums-client.properties':
@@ -79,7 +139,7 @@ file { '10-gateway.ini':
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/condor-ce/condig.d/09-hcc-tuning.conf',
-    #notify  => Service['condor-ce'],
+    notify  => Service['condor-ce'],
   }
 
   #file { '/etc/condor-ce/condor_mapfile':
@@ -99,25 +159,25 @@ file { '10-gateway.ini':
   #  source  => 'puppet:///modules/osg_ce_condor/gsi-authz.conf',
   #}
 
-  file { '/etc/sysconfig/condor-ce':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/osg_ce_condor/sysconfig-condor-ce',
-  }
+  #file { '/etc/sysconfig/condor-ce':
+  #  ensure  => present,
+  #  owner   => 'root',
+  #  group   => 'root',
+  #  mode    => '0644',
+  #  source  => 'puppet:///modules/osg_ce_condor/sysconfig-condor-ce',
+  #}
 
-  file { '/etc/blahp/pbs_local_submit_attributes.sh':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/htcondorce/pbs_local_submit_attributes.sh',
-  }
+  #file { '/etc/blahp/pbs_local_submit_attributes.sh':
+  #  ensure  => present,
+  #  owner   => 'root',
+  #  group   => 'root',
+  #  mode    => '0644',
+  #  source  => 'puppet:///modules/htcondorce/pbs_local_submit_attributes.sh',
+  #}
 
-  file { '/usr/libexec/blahp/pbs_local_submit_attributes.sh':
-    ensure  => link,
-    target  => '/etc/blahp/pbs_local_submit_attributes.sh',
-  }
+  #file { '/usr/libexec/blahp/pbs_local_submit_attributes.sh':
+  #  ensure  => link,
+  #  target  => '/etc/blahp/pbs_local_submit_attributes.sh',
+  #}
 
 }

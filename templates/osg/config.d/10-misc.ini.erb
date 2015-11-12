@@ -1,4 +1,10 @@
 ;===================================================================
+;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
+; authorization_method = xacml
+;	gums_host = "<%= scope.lookupvar('htcondorce::gums_host') %>"
+;===================================================================
+
+;===================================================================
 ;                              Misc Services
 ;===================================================================
 
@@ -18,17 +24,17 @@ authorization_method = xacml
 
 ; This setting should be set to the host used for gums host.
 ; If your site is not using a gums host, you can set this to DEFAULT
-gums_host = red-auth.unl.edu
+gums_host = "<%= scope.lookupvar('htcondorce::gums_host') %>"
 
 
 ; The OSG cleanup scripts are provided to help remove Globus files that
 ; build up over time on your system.  For more information see the Twiki:
 ;  https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCleanupScripts
-; enable_cleanup indicates whether to setup OSG cleanup scripts.   They are 
+; enable_cleanup indicates whether to setup OSG cleanup scripts.   They are
 ; disabled by default
 ; enable_cleanup = False
 
-; The age in days after which files that have not been accessed should be 
+; The age in days after which files that have not been accessed should be
 ; deleted. Jobs that run longer than this number of days may be killed because
 ; necessary files may be removed.  If this is a problem for you do not run the
 ; osg-cleanup scripts and email vdt-support@opensciencegrid.org
@@ -37,7 +43,7 @@ gums_host = red-auth.unl.edu
 
 ; The user's home directories that should be cleaned up.  The default value
 ; is @vo-file.  This will open osg-user-vo-map.txt and try to get the list
-; of users from this file.  Alternatively you can specify a whitespace 
+; of users from this file.  Alternatively you can specify a whitespace
 ; separated list of users.
 ;cleanup_users_list = @vo-file
 
