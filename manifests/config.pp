@@ -86,7 +86,7 @@ class htcondorce::config {
     path        => "/usr/sbin",
     command     => "osg-configure -c",
     subscribe   => File["/var/lib/osg/osg-job-environment.conf"],
-    refereshonly  => true,
+    refreshonly  => true,
     onlyif      => "osg-configure -v",
     logoutput   => "on_failure",
   }
