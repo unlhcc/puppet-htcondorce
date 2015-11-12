@@ -7,7 +7,7 @@ class htcondorce::config {
     group   => 'root',
     mode    => '0644',
     content => template('htcondorce/ProbeConfig.erb'),
-    require => Package['gratia-probe-slurm'],
+#    require => Package['gratia-probe-slurm'],
   }
 
   file { '01-squid.ini':
