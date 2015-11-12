@@ -4,7 +4,8 @@ class htcondorce (
   #$backend_scheduler = $htcondorce::params::backend_scheduler,
   ) inherits htcondorce::params {
 
-    include htcondorce::install, htcondorce::config, htcondorce::services, htcondorce::hostcert
+    include htcondorce::install, htcondorce::config, htcondorce::services, htcondorce::hostcert, htcondorce::sharedfs
+
 
     if $backend_scheduler =~ /^slurm$/ {
         package { "gratia-probe-slurm": ensure => present }
