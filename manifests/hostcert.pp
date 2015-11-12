@@ -3,7 +3,7 @@ class htcondorce::hostcert {
     ensure => directory,
     owner  => "root",
     group => "root",
-    mode => 0755,
+    mode => "0755",
   }
   file { "hostcert.pem":
 		path    => "/etc/grid-security/hostcert.pem",
