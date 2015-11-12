@@ -7,7 +7,7 @@ class htcondorce::hostcert {
   }
   file { "hostcert.pem":
 		path    => "/etc/grid-security/hostcert.pem",
-    ensure  => present
+    ensure  => present,
 		owner   => "puppet",
     group => "root",
     mode => "0644",
