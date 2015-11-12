@@ -8,7 +8,7 @@ class htcondorce::hostcert {
   file { "hostcert.pem":
 		path    => "/etc/grid-security/hostcert.pem",
     ensure  => present,
-		owner   => "puppet",
+		owner   => "root",
     group => "root",
     mode => "0644",
     show_diff => false,
@@ -17,7 +17,7 @@ class htcondorce::hostcert {
   file { "hostkey.pem":
 		path    => "/etc/grid-security/hostkey.pem",
     ensure  => present,
-		owner   => "puppet",
+		owner   => "root",
     group => "root",
     mode => "0600",
     show_diff => false,
