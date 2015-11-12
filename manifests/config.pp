@@ -74,7 +74,7 @@ class htcondorce::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('htcondorce/osg/config.d/40-siteinfo.erb'),
+    content => template('htcondorce/osg/config.d/40-siteinfo.ini.erb'),
   }
 
   file { 'osg-job-environment.conf':
