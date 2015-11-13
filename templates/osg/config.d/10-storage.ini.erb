@@ -1,7 +1,7 @@
 ;===================================================================
 ;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
 ; se_available = TRUE
-;	default_se = srm.unl.edu
+;	default_se = <%= scope.lookupvar('htcondorce::storage_element') %>
 ;	app_dir = /cvmfs/oasis.opensciencegrid.org
 ; worker_node_temp = /tmp
 ;===================================================================
@@ -24,7 +24,7 @@ se_available = TRUE
 
 ; If you indicated that you have an se available at your cluster, set default_se to
 ; the hostname of this SE, otherwise set default_se to UNAVAILABLE
-default_se = srm.unl.edu
+default_se = <%= scope.lookupvar('htcondorce::storage_element') %>
 
 ; The grid_dir setting should point to the directory which holds the files
 ; from the OSG worker node package, it should be visible on all of the computer

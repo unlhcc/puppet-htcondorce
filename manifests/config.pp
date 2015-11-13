@@ -28,6 +28,24 @@ class htcondorce::config {
     source  => 'puppet:///modules/htcondorce/osg/config.d/10-gateway.ini',
   }
 
+  file { '10-misc.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/10-misc.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('htcondorce/osg/config.d/10-misc.ini.erb'),
+  }
+
+  file { '10-storage.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/10-storage.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content  => template('htcondorce/osg/config.d/10-gateway.ini.erb'),
+  }
+
   file { '20-pbs.ini':
     ensure  => file,
     path    => '/etc/osg/config.d/20-pbs.ini',
