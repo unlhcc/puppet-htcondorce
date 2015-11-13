@@ -43,7 +43,7 @@ class htcondorce::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content  => template('htcondorce/osg/config.d/10-gateway.ini.erb'),
+    content  => template('htcondorce/osg/config.d/10-storage.ini.erb'),
   }
 
   file { '20-pbs.ini':
