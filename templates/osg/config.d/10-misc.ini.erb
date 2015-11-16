@@ -1,7 +1,7 @@
 ;===================================================================
 ;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
 ; authorization_method = xacml
-;	gums_host = "<%= scope.lookupvar('htcondorce::gums_host') %>"
+;	gums_host = <%= scope.lookupvar('htcondorce::gums_host') %>
 ;===================================================================
 
 ;===================================================================
@@ -24,7 +24,7 @@ authorization_method = xacml
 
 ; This setting should be set to the host used for gums host.
 ; If your site is not using a gums host, you can set this to DEFAULT
-gums_host = "<%= scope.lookupvar('htcondorce::gums_host') %>"
+gums_host = <%= scope.lookupvar('htcondorce::gums_host') %>
 
 
 ; The OSG cleanup scripts are provided to help remove Globus files that

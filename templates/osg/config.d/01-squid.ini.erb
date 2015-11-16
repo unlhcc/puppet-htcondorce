@@ -1,6 +1,6 @@
 ;===================================================================
 ;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
-; location = "<%= scope.lookupvar('htcondorce::squid_server') %>"
+; location = <%= scope.lookupvar('htcondorce::squid_server') %>
 ;===================================================================
 
 ;===================================================================
@@ -14,7 +14,7 @@ enabled = True
 
 ; If you are using squid, specify the location of the squid server in the
 ; location setting, this should be an url
-location = "<%= scope.lookupvar('htcondorce::squid_server') %>"
+location = <%= scope.lookupvar('htcondorce::squid_server') %>
 
 ; If you are using squid, use the policy setting to indicate which cache
 ; replacement policy squid is using
