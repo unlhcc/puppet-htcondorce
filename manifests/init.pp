@@ -28,6 +28,7 @@ class htcondorce (
       ensure => present
     }
 
+    package { "slurm-torque": ensure => present }
 
 
 
