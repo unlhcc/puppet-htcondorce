@@ -3,6 +3,9 @@ class htcondorce::fetch_crl{
     path    => "/etc/grid-security/certificates",
     matches => [ "CyGrid*"],
   }
+  package { "fetch-crl":
+    ensure => present
+  }
   service {"fetch-crl-boot":
     ensure  => running,
     enable  => true,

@@ -7,7 +7,7 @@ class htcondorce::condor_ce{
     enable  => true,
     hasstatus  => true,
     hasrestart => true,
-    requie  => Package["htcondor-ce"]
+    require  => Package["htcondor-ce"]
   }
   file { 'blah.config':
     path    => '/etc/blah.config',
