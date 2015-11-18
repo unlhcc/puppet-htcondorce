@@ -8,6 +8,6 @@ class htcondorce::gratia () {
     enable  => true,
     hasstatus  => true,
     hasrestart => true,
-    requie  => Package["gratia-probe-common"],
+    require  => Package["gratia-probe-common"],
   }
 }
