@@ -1,4 +1,4 @@
-class htcondorce::condor-ce{
+class htcondorce::condor_ce{
   package { "htcondor-ce":
     ensure => present
   }
