@@ -1,10 +1,17 @@
 
 class htcondorce (
-  #$squid = $htcondorce::params::squid_server,
-  #$backend_scheduler = $htcondorce::params::backend_scheduler,
+  $squid = $htcondorce::params::squid_server,
+  $backend_scheduler = $htcondorce::params::backend_scheduler,
   ) inherits htcondorce::params {
 
-    include htcondorce::install, htcondorce::config, htcondorce::services, htcondorce::hostcert, htcondorce::sharedfs
+    include htcondorce::install,
+            htcondorce::osg,
+            htcondorce::condor-ce,
+            htcondorce::hostcert,
+            htcondorce::sharedfs,
+            htcondorce::gratia,
+            htcondorce::gums,
+            htcondorce::fetch-crl,
 
 
     if $backend_scheduler =~ /^slurm$/ {
@@ -17,9 +24,9 @@ class htcondorce (
 
     validate_re($real_backend_scheduler, [ '^pbs$', '^condor$', '^lsf$', '^sge$' ], "Error, backend_scheduler must be either pbs, condor, lsf, or sge.  Is actually ${real_backend_scheduler}")
 
-#    package { "osg-ce-${real_backend_scheduler}":
-#      ensure => present
-#    }
+    package { "osg-ce-${real_backend_scheduler}":
+      ensure => present
+    }
 
 
 

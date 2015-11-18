@@ -12,5 +12,11 @@ class htcondorce::sharedfs {
     mode    => "0644",
     source  => "puppet:///modules/htcondorce/exports",
     notify  => Service["nfs"],
-  } 
+  }
+  service {"nfs":
+    ensure  => running,
+    enable  => true,
+    hasstatus  => true,
+    hasrestart => true,
+  }
 }
