@@ -14,6 +14,6 @@ class htcondorce::gums{
     enable  => true,
     hasstatus  => true,
     hasrestart => true,
-    requie  => Package["gums-client"],
+    require  => Package["gums-client"],
   }
 }
