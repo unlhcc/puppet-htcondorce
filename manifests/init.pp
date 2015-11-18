@@ -12,7 +12,6 @@ class htcondorce (
             htcondorce::gratia,
             htcondorce::gums,
             htcondorce::fetch_crl,
-            cvmfs
 
 
     if $backend_scheduler =~ /^slurm$/ {
