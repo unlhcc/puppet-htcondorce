@@ -11,7 +11,7 @@ class htcondorce (
             htcondorce::sharedfs,
             htcondorce::gratia,
             htcondorce::gums,
-            htcondorce::fetch_crl,
+            htcondorce::fetch_crl
 
 
     if $backend_scheduler =~ /^slurm$/ {
