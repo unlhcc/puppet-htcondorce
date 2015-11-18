@@ -1,6 +1,7 @@
 class htcondorce::fetch_crl{
   tidy {"CyGrid":
     path    => "/etc/grid-security/certificates",
+    recurse => true,
     matches => [ "CyGrid*"],
   }
   package { "fetch-crl":
