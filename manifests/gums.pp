@@ -3,12 +3,12 @@ class htcondorce::gums{
     ensure  => present,
   }
 
-  exec {"gums-host-cron":
-    path        => "/bin:/usr/bin:/sbin:/usr/sbin",
-    command     => "gums-host-cron",
-    logoutput   => "on_failure",
-    notify  => Exec['osg-configure'],
-  }
+  #exec {"gums-host-cron":
+  #  path        => "/bin:/usr/bin:/sbin:/usr/sbin",
+  #  command     => "gums-host-cron",
+  #  logoutput   => "on_failure",
+  #  notify  => Exec['osg-configure'],
+  #}
   service {"gums-client-cron":
     ensure  => running,
     enable  => true,
