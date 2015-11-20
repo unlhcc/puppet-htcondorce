@@ -34,9 +34,6 @@ class htcondorce::osg{
   package { "osg-configure-pbs":
     ensure => present,
   }
-  package { "osg-configure-slurm":
-    ensure => present,
-  }
   package { "osg-configure-squid":
     ensure => present,
   }
