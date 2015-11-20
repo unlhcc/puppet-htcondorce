@@ -2,9 +2,6 @@ class htcondorce::gratia () {
   package { "gratia-probe-common":
     ensure => present
   }
-  package { "gratia-probe-slurm":
-    ensure => present
-  }
 
   file { 'ProbeConfig':
     ensure  => file,
@@ -15,7 +12,7 @@ class htcondorce::gratia () {
     content => template('htcondorce/ProbeConfig.erb'),
     require => Package['gratia-probe-slurm'],
   }
-  
+
   service {"gratia-probes-cron":
     ensure  => running,
     enable  => true,
