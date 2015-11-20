@@ -4,40 +4,40 @@ class htcondorce::osg{
     ensure  => present,
   }
 
-  package { "osg-confiure":
+  package { "osg-configure":
     ensure => present,
   }
-  package { "osg-confiure-ce":
+  package { "osg-configure-ce":
     ensure => present,
   }
-  package { "osg-confiure-gateway":
+  package { "osg-configure-gateway":
     ensure => present,
   }
-  package { "osg-confiure-gip":
+  package { "osg-configure-gip":
     ensure => present,
   }
-  package { "osg-confiure-gratia":
+  package { "osg-configure-gratia":
     ensure => present,
   }
-  package { "osg-confiure-infoservices":
+  package { "osg-configure-infoservices":
     ensure => present,
   }
-  package { "osg-confiure-managedfork":
+  package { "osg-configure-managedfork":
     ensure => present,
   }
-  package { "osg-confiure-misc":
+  package { "osg-configure-misc":
     ensure => present,
   }
-  package { "osg-confiure-network":
+  package { "osg-configure-network":
     ensure => present,
   }
-  package { "osg-confiure-pbs":
+  package { "osg-configure-pbs":
     ensure => present,
   }
-  package { "osg-confiure-slurm":
+  package { "osg-configure-slurm":
     ensure => present,
   }
-  package { "osg-confiure-squid":
+  package { "osg-configure-squid":
     ensure => present,
   }
 
