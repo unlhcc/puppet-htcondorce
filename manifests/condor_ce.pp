@@ -1,5 +1,17 @@
 class htcondorce::condor_ce{
+  package { "condor":
+    ensure => present,
+  }
+  package { "blahp":
+    ensure => present,
+  }
   package { "htcondor-ce":
+    ensure => present,
+  }
+  package { "htcondor-ce-client":
+    ensure => present
+  }
+  package { "htcondor-ce-pbs":
     ensure => present
   }
   service {"condor-ce":
@@ -16,16 +28,7 @@ class htcondorce::condor_ce{
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/blah.config',
-  }
-
-  file { 'condor-ce-01-ce-auth':
-    ensure  => present,
-    path    => '/etc/condor-ce/config.d/01-ce-auth.conf',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/htcondorce/condor-ce/config.d/01-ce-auth.conf',
-    notify  => Service['condor-ce'],
+    require => Package["blahp"],
   }
 
   file { 'condor-ce-hcc-config':

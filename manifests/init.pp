@@ -4,8 +4,7 @@ class htcondorce (
   $backend_scheduler = $htcondorce::params::backend_scheduler,
   ) inherits htcondorce::params {
 
-    include htcondorce::install,
-            htcondorce::osg,
+    include htcondorce::osg,
             htcondorce::condor_ce,
             htcondorce::hostcert,
             htcondorce::sharedfs,

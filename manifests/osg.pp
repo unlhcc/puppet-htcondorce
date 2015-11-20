@@ -1,4 +1,46 @@
 class htcondorce::osg{
+
+  package { "osg-version":
+    ensure  => present,
+  }
+
+  package { "osg-confiure":
+    ensure => present,
+  }
+  package { "osg-confiure-ce":
+    ensure => present,
+  }
+  package { "osg-confiure-gateway":
+    ensure => present,
+  }
+  package { "osg-confiure-gip":
+    ensure => present,
+  }
+  package { "osg-confiure-gratia":
+    ensure => present,
+  }
+  package { "osg-confiure-infoservices":
+    ensure => present,
+  }
+  package { "osg-confiure-managedfork":
+    ensure => present,
+  }
+  package { "osg-confiure-misc":
+    ensure => present,
+  }
+  package { "osg-confiure-network":
+    ensure => present,
+  }
+  package { "osg-confiure-pbs":
+    ensure => present,
+  }
+  package { "osg-confiure-slurm":
+    ensure => present,
+  }
+  package { "osg-confiure-squid":
+    ensure => present,
+  }
+
   file { '01-squid.ini':
     ensure  => file,
     path    => '/etc/osg/config.d/01-squid.ini',
@@ -6,6 +48,7 @@ class htcondorce::osg{
     group   => 'root',
     mode    => '0644',
     content => template('htcondorce/osg/config.d/01-squid.ini.erb'),
+    require => Package['osg-configure-squid'],
     notify  => Exec['osg-configure'],
   }
 
@@ -16,6 +59,7 @@ class htcondorce::osg{
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/osg/config.d/10-gateway.ini',
+    require => Package['osg-configure-gateway'],
     notify  => Exec['osg-configure'],
   }
 
@@ -26,6 +70,7 @@ class htcondorce::osg{
     group   => 'root',
     mode    => '0644',
     content => template('htcondorce/osg/config.d/10-misc.ini.erb'),
+    require => Package['osg-configure-misc'],
     notify  => Exec['osg-configure'],
   }
 
@@ -36,6 +81,7 @@ class htcondorce::osg{
     group   => 'root',
     mode    => '0644',
     content  => template('htcondorce/osg/config.d/10-storage.ini.erb'),
+    require => Package['osg-configure-ce'],
     notify  => Exec['osg-configure'],
   }
 
@@ -46,6 +92,7 @@ class htcondorce::osg{
     group   => 'root',
     mode    => '0644',
     content => template('htcondorce/osg/config.d/20-pbs.ini.erb'),
+    require => Package['osg-configure-pbs'],
     notify  => Exec['osg-configure'],
   }
 
@@ -56,6 +103,7 @@ class htcondorce::osg{
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/osg/config.d/30-gip.ini',
+    require => Package['osg-configure-gip'],
     notify  => Exec['osg-configure'],
   }
 
@@ -66,6 +114,7 @@ class htcondorce::osg{
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/osg/config.d/30-infoservices.ini',
+    require => Package['osg-configure-infoservices'],
     notify  => Exec['osg-configure'],
   }
 
@@ -77,6 +126,7 @@ class htcondorce::osg{
     mode    => '0644',
     content => template('htcondorce/osg/config.d/40-siteinfo.ini.erb'),
     notify  => Exec['osg-configure'],
+    require => Package['osg-configure-ce'],
   }
 
   exec {"osg-configure":
@@ -86,5 +136,16 @@ class htcondorce::osg{
       logoutput   => "on_failure",
   }
 
+  package {"osg-info-services":
+    ensure  => present,
+  }
+  service {"osg-info-services":
+    ensure  => running,
+    enable  => true,
+    hasstatus  => true,
+    hasrestart => true,
+    require  => Package['osg-info-services'],
+    subscribe => Exec['osg-configure'],
+  }
 
 }
