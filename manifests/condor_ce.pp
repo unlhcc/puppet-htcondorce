@@ -28,7 +28,6 @@ class htcondorce::condor_ce{
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/htcondorce/blah.config',
-    selinux_ignore_defaults => true,
     require => Package["blahp"],
   }
 
