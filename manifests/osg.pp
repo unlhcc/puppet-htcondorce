@@ -130,6 +130,7 @@ class htcondorce::osg{
       path        => "/bin:/usr/bin:/sbin:/usr/sbin",
       command     => "osg-configure -c",
       notify      => Service["condor-ce"],
+      refreshonly => true,
       logoutput   => "on_failure",
   }
 
