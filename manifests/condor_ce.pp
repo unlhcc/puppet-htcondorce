@@ -32,6 +32,16 @@ class htcondorce::condor_ce{
     require => Package["blahp"],
   }
 
+  file { 'condor_mapfile':
+    ensure  => present,
+    path    => '/etc/condor-ce/condor_mapfile',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/htcondorce/condor-ce/condor_mapfile',
+    notify  => Service['condor-ce'],
+  }
+
   file { 'condor-ce-hcc-config':
     ensure  => present,
     path    => '/etc/condor-ce/config.d/09-hcc-tuning.conf',
