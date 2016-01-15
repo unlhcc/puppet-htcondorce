@@ -3,7 +3,7 @@
 ; se_available = TRUE
 ;	default_se = <%= scope.lookupvar('htcondorce::storage_element') %>
 ;	app_dir = /cvmfs/oasis.opensciencegrid.org
-; worker_node_temp = /tmp
+; worker_node_temp = /scratch
 ;===================================================================
 
 ;===================================================================
@@ -64,7 +64,7 @@ data_dir = UNAVAILABLE
 ; OSG jobs run otherwise jobs will most likely fail
 ;
 ; YOU WILL NEED TO CHANGE THIS
-worker_node_temp = /tmp
+worker_node_temp = /scratch
 
 ; The site_read setting should be the location or url to a directory that can
 ; be read to stage in data, this is an url if you are using a SE
