@@ -2,7 +2,7 @@
 ;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
 ; enabled = TRUE
 ; job_contact = <%= @fqdn %>/jobmanager-pbs
-; util_contact = s<%= @fqdn %>/jobmanager
+; util_contact = <%= @fqdn %>/jobmanager
 ;===================================================================
 
 
@@ -30,7 +30,7 @@ job_contact = <%= @fqdn %>/jobmanager-pbs
 
 ; The util_contact should give the contact string for the default jobmanager
 ; on this CE (e.g. host.name/jobmanager)
-util_contact = s<%= @fqdn %>/jobmanager
+util_contact = <%= @fqdn %>/jobmanager
 
 ; This setting is optional and determines whether the PBS SEG module is enabled
 ; for the PBS job manager. Although using the SEG requires access to your PBS
