@@ -1,4 +1,6 @@
-class htcondorce::gratia () {
+class htcondorce::gratia (
+  $slurm_db_password = '';
+) {
   package { "gratia-probe-common":
     ensure => present
   }
