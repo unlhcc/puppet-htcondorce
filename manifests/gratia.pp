@@ -9,7 +9,17 @@ class htcondorce::gratia () {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('htcondorce/ProbeConfig.erb'),
+    content => template('htcondorce/gratia/slurm/ProbeConfig.erb'),
+    require => Package['gratia-probe-slurm'],
+  }
+
+  file { 'pwfile':
+    ensure  => file,
+    path    => '/etc/gratia/slurm/pwfile',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => template('htcondorce/gratia/slurm/pwfile.erb'),
     require => Package['gratia-probe-slurm'],
   }
 

@@ -115,6 +115,17 @@ class htcondorce::osg{
     notify  => Exec['osg-configure'],
   }
 
+  file { '30-gratia.ini':
+    ensure  => file,
+    path    => '/etc/osg/config.d/30-gratia.ini',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('htcondorce/osg/config.d/30-gratia.ini.erb'),
+    require => Package['osg-configure-gratia'],
+    notify  => Exec['osg-configure'],
+  }
+
   file { '40-siteinfo.ini':
     ensure  => file,
     path    => '/etc/osg/config.d/40-siteinfo.ini',
