@@ -7,4 +7,5 @@ class htcondorce::params {
   $resource_name = "Sandhills-CE1"
   $gums_host = "red-auth.unl.edu"
   $storage_element ="srm.unl.edu"
+  $gip_queue_exclude = ''
 }

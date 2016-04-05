@@ -1,7 +1,7 @@
 
 class htcondorce (
-  $squid = $htcondorce::params::squid_server,
   $backend_scheduler = $htcondorce::params::backend_scheduler,
+  $gip_queue_exclude = $htcondorce::params::gip_queue_exclude,
   ) inherits htcondorce::params {
 
     include htcondorce::osg,
@@ -13,22 +13,18 @@ class htcondorce (
             htcondorce::fetch_crl
 
 
-    if $backend_scheduler =~ /^slurm$/ {
-        package { "gratia-probe-slurm": ensure => present }
-        package { "osg-configure-slurm" : ensure => present }
-        $real_backend_scheduler = "pbs"
+    if $backend_scheduler == 'pbs' or $backend_scheduler == 'lsf' {
+        package { 'gratia-probe-pbs-lsf': ensure => present }
     } else {
-        $real_backend_scheduler = $backend_scheduler
+        package { "gratia-probe-${backend_scheduler}": ensure => present }
     }
 
-    validate_re($real_backend_scheduler, [ '^pbs$', '^condor$', '^lsf$', '^sge$' ], "Error, backend_scheduler must be either pbs, condor, lsf, or sge.  Is actually ${real_backend_scheduler}")
+    validate_re($backend_scheduler, [ '^pbs$', '^condor$', '^lsf$', '^sge$', '^slurm$' ], "Error, backend_scheduler must be either pbs, condor, lsf, sge, or slurm.  Is actually ${backend_scheduler}")
 
-    package { "osg-ce-${real_backend_scheduler}":
-      ensure => present
+    package { "osg-ce-${backend_scheduler}": ensure => present }
+
+    if $backend_scheduler == 'slurm' {
+        package { 'slurm-torque': ensure => present }
     }
-
-    package { "slurm-torque": ensure => present }
-
-
 
 }

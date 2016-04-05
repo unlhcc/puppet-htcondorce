@@ -1,4 +1,6 @@
-class htcondorce::osg{
+class htcondorce::osg (
+  $backend_scheduler = hiera('htcondorce::backend_scheduler'),
+) inherits htcondorce::params {
 
   package { "osg-version":
     ensure  => present,
@@ -31,7 +33,7 @@ class htcondorce::osg{
   package { "osg-configure-network":
     ensure => present,
   }
-  package { "osg-configure-pbs":
+  package { "osg-configure-${backend_scheduler}":
     ensure => present,
   }
   package { "osg-configure-squid":
@@ -82,14 +84,14 @@ class htcondorce::osg{
     notify  => Exec['osg-configure'],
   }
 
-  file { '20-pbs.ini':
+  file { "20-${backend_scheduler}.ini":
     ensure  => file,
-    path    => '/etc/osg/config.d/20-pbs.ini',
+    path    => "/etc/osg/config.d/20-${backend_scheduler}.ini",
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('htcondorce/osg/config.d/20-pbs.ini.erb'),
-    require => Package['osg-configure-pbs'],
+    content => template("htcondorce/osg/config.d/20-${backend_scheduler}.ini.erb"),
+    require => Package["osg-configure-${backend_scheduler}"],
     notify  => Exec['osg-configure'],
   }
 
