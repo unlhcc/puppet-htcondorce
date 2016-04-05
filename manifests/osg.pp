@@ -101,7 +101,7 @@ class htcondorce::osg (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/htcondorce/osg/config.d/30-gip.ini',
+    content => template("htcondorce/osg/config.d/30-gip.ini.erb"),
     require => Package['osg-configure-gip'],
     notify  => Exec['osg-configure'],
   }

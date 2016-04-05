@@ -13,7 +13,7 @@
 ;; This setting indicates the batch system that GIP should query
 ;; and advertise
 ;; This should be the name of the batch system in lowercase
-batch = pbs
+batch = <%= scope.lookupvar('htcondorce::backend_scheduler') %>
 ;; Options include: pbs, lsf, sge, or condor
 
 ; ========= These settings can be left as is for the standard install ========
