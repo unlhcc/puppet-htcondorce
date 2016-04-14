@@ -2,6 +2,9 @@ class htcondorce::osg (
   $backend_scheduler = hiera('htcondorce::backend_scheduler'),
 ) inherits htcondorce::params {
 
+  package { "osg-ca-certs":
+    ensure  => latest,
+  }
   package { "osg-version":
     ensure  => present,
   }
