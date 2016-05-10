@@ -32,6 +32,16 @@ class htcondorce::condor_ce{
     require => Package["blahp"],
   }
 
+  file { 'pbs_local_submit_attributes.sh':
+    path    => '/etc/blahp/pbs_local_submit_attributes.sh',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/htcondorce/blahp/pbs_local_submit_attributes.sh',
+    require => Package["blahp"],
+  }
+
   file { 'condor_mapfile':
     ensure  => present,
     path    => '/etc/condor-ce/condor_mapfile',
