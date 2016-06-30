@@ -153,13 +153,13 @@ class htcondorce::osg (
   package {"osg-info-services":
     ensure  => present,
   }
-  service {"osg-info-services":
-    ensure  => running,
-    enable  => true,
-    hasstatus  => true,
-    hasrestart => true,
-    require  => Package['osg-info-services'],
-    subscribe => Exec['osg-configure'],
-  }
+  #service {"osg-info-services":
+  #  ensure  => running,
+  #  enable  => true,
+  #  hasstatus  => true,
+  #  hasrestart => true,
+  #  require  => Package['osg-info-services'],
+  #  subscribe => Exec['osg-configure'],
+  #}
 
 }
