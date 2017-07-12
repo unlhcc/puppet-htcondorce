@@ -10,12 +10,14 @@ else
   echo "#PBS -l walltime=24:00:00"
 fi
 
+# Load 'module' for CUDA and singularity
+echo "for file in \`ls /etc/profile.d/*.sh\`; do"
+echo ". \$file"
+echo "done"
+
 # Set the number of requested GPUs
 if [ -n "$RequestGpus" ]; then
   echo "#SBATCH --gres=gpu:$RequestGpus"
-  echo "for file in \`ls /etc/profile.d/*.sh\`; do"
-  echo ". \$file"
-  echo "done"
   echo "module load cuda/6.0"
 fi
 
