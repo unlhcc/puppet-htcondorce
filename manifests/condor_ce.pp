@@ -14,6 +14,12 @@ class htcondorce::condor_ce{
   package { "htcondor-ce-pbs":
     ensure => present
   }
+  package { "lcmaps-plugins-voms":
+    ensure => present
+  }
+  package { "lcmaps-plugins-verify-proxy":
+    ensure => present
+  }
   service {"condor-ce":
     ensure  => running,
     enable  => true,
