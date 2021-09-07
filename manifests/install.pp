@@ -7,7 +7,7 @@ class htcondorce::install {
   package { 'osg-ce': ensure => present, }
   package { 'vo-client': ensure => latest, }
   package { 'voms': ensure => latest, }
-  package { 'osg-ca-certs': => latest, }
+  package { 'osg-ca-certs': ensure => latest, }
 
   # Install HTCondor-CE Gratia probe
   package { 'gratia-probe-htcondor-ce': ensure => present, }
