@@ -11,23 +11,6 @@ class htcondorce::config {
   }
 
   #################### /etc/condor-ce #################################
-  #file { '/etc/condor-ce/config.d/99-local.conf':
-  #  ensure => present,
-  #  owner  => 'root',
-  #  group  => 'root',
-  #  mode   => '0644',
-  #  source => 'puppet:///modules/htcondorce/condor-ce/config.d/99-local.conf ',
-  #  notify => Service['condor-ce'],
-  #}
-
-  #file { '/etc/condor-ce/mapfiles.d/99-local.conf':
-  #  ensure => present,
-  #  owner  => 'root',
-  #  group  => 'root',
-  #  mode   => '0644',
-  #  source => 'puppet:///modules/htcondorce/condor-ce/mapfiles.d/99-local.conf ',
-  #  notify => Service['condor-ce'],
-  #}
 
   file { '/etc/condor-ce/condor_mapfile':
     ensure => present,
@@ -38,23 +21,13 @@ class htcondorce::config {
     notify  => Exec['condor_ce_reconfig'],
   }
 
-  file { '/etc/sysconfig/condor-ce':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/osg_ce_condor/sysconfig-condor-ce',
-  }
-
-  #################### /etc/condor #################################
-  file { '/etc/condor/config.d/99-local.conf':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/htcondorce/condor/config.d/99-local.conf ',
-    notify  => Exec['condor_ce_reconfig'],
-  }
+  #file { '/etc/sysconfig/condor-ce':
+  #  ensure => present,
+  #  owner  => 'root',
+  #  group  => 'root',
+  #  mode   => '0644',
+  #  source => 'puppet:///modules/osg_ce_condor/sysconfig-condor-ce',
+  #}
 
   #################### /etc/osg/config.d/ #############################
   file { "/etc/osg/config.d/01-squid.ini":
