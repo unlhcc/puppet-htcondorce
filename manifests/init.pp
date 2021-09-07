@@ -12,8 +12,7 @@ class htcondorce (
   $gip_queue_exclude = $htcondorce::params::gip_queue_exclude,
   ) inherits htcondorce::params {
 
-    include htcondorce::install,
-            htcondorce::config,
-            htcondorce::services,
-
+    include htcondorce::install
+    include  htcondorce::config
+    include  htcondorce::services
 }
