@@ -10,6 +10,17 @@ class htcondorce::config {
     refreshonly => true,
   }
 
+  #################### /etc/condor #################################
+
+  file { '/etc/condor/config.d/99-local.conf':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/condor/config.d/99-local.conf',
+    notify  => Exec['condor_ce_reconfig'],
+  }
+
   #################### /etc/condor-ce #################################
 
   file { '/etc/condor-ce/condor_mapfile':
@@ -17,7 +28,7 @@ class htcondorce::config {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/htcondorce/condor_mapfile',
+    source => 'puppet:///modules/condor-ce/condor_mapfile',
     notify  => Exec['condor_ce_reconfig'],
   }
 
