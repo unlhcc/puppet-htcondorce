@@ -8,14 +8,6 @@ class htcondorce::services {
     require    => Package['htcondor-ce'],
   }
 
-  service { 'fetch-crl-cron':
-    ensure  => running,
-    enable  => true,
-    hasstatus  => true,
-    hasrestart => true,
-    require => Package['fetch-crl'],
-  }
-
   service { 'gratia-probes-cron':
     ensure  => running,
     enable  => true,
