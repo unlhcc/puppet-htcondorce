@@ -81,7 +81,7 @@ class htcondorce::config {
   file { "/etc/osg/config.d/40-siteinfo.ini":
     ensure  => present,
     owner   => "root", group => "root", mode => '0644',
-    content => template("${module_name}/osg-config.d/40-siteinfo.ini.erb"),
+    content => template("${module_name}/osg/config.d/40-siteinfo.ini.erb"),
     notify  => Exec['osg-configure'],
   }
 
