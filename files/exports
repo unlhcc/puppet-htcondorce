@@ -1,3 +1,0 @@
-# DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
-
-/var/lib/condor-ce 10.147.0.0/16(rw,async,root_squash)

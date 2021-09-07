@@ -1,36 +1,43 @@
 ;===================================================================
 ;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
+; hostname = <%= @fqdn %>
+; resource = <%= scope.lookupvar('htcondorce::resource_name') %>
+; resource_group = <%= scope.lookupvar('htcondorce::resource_group') %>
+; sponsor = <%= scope.lookupvar('htcondorce::sponsor') %>
+; contact = <%= scope.lookupvar('htcondorce::contact') %>
+; email = <%= scope.lookupvar('htcondorce::contact') %>
 ;===================================================================
 ;===================================================================
 ;                       Site Information
 ;===================================================================
 
 [Site Information]
-; The group option indicates the group that the OSG site should be listed in,
-; for production sites this should be OSG, for vtb or itb testing it should be
-; OSG-ITB
+; Set "group" to "OSG" for a production site, or "OSG-ITB" for an ITB site.
 ;
 ; YOU WILL NEED TO CHANGE THIS
 group = OSG
 
-; The host_name setting should give the host name of the CE  that is being
-; configured, this setting must be a valid dns name that resolves
+; Set "host_name" to the host name of the CE being configured.
+; This should resolve in DNS; if DNS is not set up yet, enter an IPv4/v6 address instead.
 ;
 ; YOU WILL NEED TO CHANGE THIS
+;host_name = UNAVAILABLE
 host_name = <%= @fqdn %>
 
-; The resource setting should be set to the same value as used in the OIM
-; registration at the goc
+; Set "resource" to the name of the resource that you have registered
+; in the OSG topology repository at https://github.com/opensciencegrid/topology
 ;
 ; YOU WILL NEED TO CHANGE THIS
+;resource = UNAVAILABLE
 resource = <%= scope.lookupvar('htcondorce::resource_name') %>
 
 
-; The resource_group setting should be set to the same value as used in the OIM
-; registration at the goc
+; Set "resource_group" to the name of the resource that you have registered
+; in the OSG topology repository at https://github.com/opensciencegrid/topology
 ;
-; YOU WILL NEED TO CHANGE THIS
-resource_group = <%= scope.lookupvar('htcondorce::cluster_name') %>
+; CEs WILL NEED TO CHANGE THIS
+;resource_group = UNAVAILABLE
+resource_group = <%= scope.lookupvar('htcondorce::resource_group') %>
 
 ; The sponsor setting should list the sponsors for your cluster, if your cluster
 ; has multiple sponsors, you can separate them using commas or specify the
@@ -38,7 +45,7 @@ resource_group = <%= scope.lookupvar('htcondorce::cluster_name') %>
 ; 'osg:10, atlas:45, cms:45'
 ;
 ; YOU WILL NEED TO CHANGE THIS
-sponsor = hcc:100
+sponsor = <%= scope.lookupvar('htcondorce::sponsor') %>
 
 ; The site_policy setting should give an url that lists your site's usage
 ; policy
@@ -48,13 +55,13 @@ site_policy = "http://t2.unl.edu/site-policy"
 ; for the cluster
 ;
 ; YOU WILL NEED TO CHANGE THIS
-contact = HCC Admins
+contact = <%= scope.lookupvar('htcondorce::contact') %>
 
 ; The email setting should give the email address for the technical contact
 ; for the cluster
 ;
 ; YOU WILL NEED TO CHANGE THIS
-email = hcc-support@unl.edu
+email = <%= scope.lookupvar('htcondorce::contact') %>
 
 ; The city setting should give the city that the cluster is located in
 ;
@@ -78,7 +85,3 @@ longitude = -96.68
 ;
 ; YOU WILL NEED TO CHANGE THIS
 latitude = 40.81
-
-; This option has been deprecated and should not be used.  It has been replaced
-; by the resource and resource_group settings
-; site_name = UNAVAILABLE

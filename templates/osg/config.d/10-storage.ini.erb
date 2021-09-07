@@ -1,9 +1,7 @@
 ;===================================================================
 ;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
-; se_available = TRUE
-;	default_se = <%= scope.lookupvar('htcondorce::storage_element') %>
-;	app_dir = /cvmfs/oasis.opensciencegrid.org
-; worker_node_temp = /scratch
+; app_dir = <%= scope.lookupvar('htcondorce::app_dir') %>
+; worker_node_temp = <%= scope.lookupvar('htcondorce::worker_node_temp') %>
 ;===================================================================
 
 ;===================================================================
@@ -20,11 +18,17 @@
 
 ; If you have a SE available for your cluster and wish to make it available
 ; to incoming jobs, set se_available to True, otherwise set it to False
-se_available = TRUE
+se_available = FALSE
 
 ; If you indicated that you have an se available at your cluster, set default_se to
 ; the hostname of this SE, otherwise set default_se to UNAVAILABLE
-default_se = <%= scope.lookupvar('htcondorce::storage_element') %>
+default_se = UNAVAILABLE
+
+; Several of these values are constrained and need to be set in a way
+; that is consistent with one of the OSG storage models
+;
+; Please refer to the OSG release documentation for an in-depth explanation
+; of the various storage models and the requirements for them
 
 ; The grid_dir setting should point to the directory which holds the files
 ; from the OSG worker node package, it should be visible on all of the computer
@@ -37,13 +41,16 @@ grid_dir = /etc/osg/wn-client/
 ; specific applications.  It corresponds to the OSG_APP environment variable
 ; in jobs.
 ;
-; If no such directory is available, set app_dir to UNSET.
-; UNSET will keep the OSG_APP environment variable from being defined.
+; If no such directory is available, set app_dir to UNSET or UNAVAILABLE.
 ; app_dir may be in OASIS.
+; To use an app_dir in OASIS, set it to "/cvmfs/oasis.opensciencegrid.org".
 ; If not in OASIS, then app_dir should have an etc/ subdirectory, and both
 ; app_dir and app_dir/etc must be world readable and executable (i.e. at
 ; least 755 or 1755 permissions).
-app_dir = /cvmfs/oasis.opensciencegrid.org
+;
+; This setting is optional.
+;app_dir = UNAVAILABLE
+app_dir = <%= scope.lookupvar('htcondorce::app_dir') %>
 
 ; The data_dir setting should point to a directory that can be used to store
 ; and stage data in and out of the cluster.  It corresponds to the OSG_DATA
@@ -53,7 +60,7 @@ app_dir = /cvmfs/oasis.opensciencegrid.org
 ; nodes.
 ;
 ; This setting is optional.
-data_dir = UNAVAILABLE
+;data_dir = UNAVAILABLE
 
 ; The worker_node_temp directory should point to a directory that can be used
 ; as scratch space on compute nodes, it should allow read and write access on the
@@ -64,16 +71,17 @@ data_dir = UNAVAILABLE
 ; OSG jobs run otherwise jobs will most likely fail
 ;
 ; YOU WILL NEED TO CHANGE THIS
-worker_node_temp = /scratch
+;worker_node_temp = UNAVAILABLE
+worker_node_temp = <%= scope.lookupvar('htcondorce::worker_node_temp') %>
 
 ; The site_read setting should be the location or url to a directory that can
 ; be read to stage in data, this is an url if you are using a SE
 ;
-; YOU WILL NEED TO CHANGE THIS
-site_read = UNAVAILABLE
+; This setting is optional.
+;site_read = UNAVAILABLE
 
 ; The site_write setting should be the location or url to a directory that can
 ; be write to stage out data, this is an url if you are using a SE
 ;
-; YOU WILL NEED TO CHANGE THIS
-site_write = UNAVAILABLE
+; This setting is optional.
+;site_write = UNAVAILABLE

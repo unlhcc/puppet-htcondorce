@@ -1,11 +1,16 @@
-<!-- DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET) -->
+;===================================================================
+;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
+; location = <%= scope.lookupvar('htcondorce::squid_server') %>
+; ProbeName="htcondor-ce:<%= @fqdn %>"
+; SiteName="<%= scope.lookupvar('htcondorce::resource_name') %>"
+;===================================================================
 
 <ProbeConfiguration
 
     Title1="Collector Information"
 
     CollectorHost="gratia-osg-prod.opensciencegrid.org:80"
-    SSLHost="gratia-osg-prod.opensciencegrid.org:443"
+    SSLHost="gratia-osg-prod.opensciencegrid.org:80"
     SSLRegistrationHost="gratia-osg-prod.opensciencegrid.org:80"
 
     CollectorService="/gratia-servlets/rmi"
@@ -14,12 +19,12 @@
 
     Title2="Probe information and functional configuration"
 
-    ProbeName="slurm:<%= @fqdn %>"
+    ProbeName="htcondor-ce:<%= @fqdn %>"
     SiteName="<%= scope.lookupvar('htcondorce::resource_name') %>"
     Grid="OSG"
     SuppressUnknownVORecords="0"
     SuppressNoDNRecords="1"
-    SuppressGridLocalRecords="0"
+    SuppressGridLocalRecords="1"
     QuarantineUnknownVORecords="1"
     EnableProbe="1"
 
@@ -36,10 +41,14 @@
     DebugLevel="0"
        Comments33="Controls debug messages printed to screen."
     LogRotate="31"
+    LogFileName=""
+       Comments34="If LogFileName is set, then there is no log file rotation. Otherwise Log file rotation will create one new file each day and delete the older ones"
+    DataLengthMax="0"
+       Comments35="The maximum number of records (or hours, depending on the probe) processed in a single invocation, 0 = all records, no max"
     DataFileExpiration="31"
-       Comments34="The number of days quarantined and unusable data files are kept"
+       Comments36="The number of days quarantined and unusable data files are kept"
     QuarantineSize="200"
-       Comments35="The maximum size in Mb allowed to be kept in each quarantined directory"
+       Comments37="The maximum size in Mb allowed to be kept in each quarantined directory"
     GratiaExtension="gratia.xml"
 
     Title4="Authentication Configuration"
@@ -57,19 +66,18 @@
     UserVOMapFile="/var/lib/osg/user-vo-map"
         Comments51="Location and wildcard pattern of log files that contains certificate information about the jobs in the format followed by the 'blah demons'."
     CertInfoLogPattern="/var/log/accounting/blahp.log-*"
-    CondorCEHistoryFolder="/var/lib/gratia/condorce_data"
+    CondorCEHistoryFolder="/var/lib/gratia/data"
 
     DataFolder="/var/lib/gratia/data/"
     WorkingFolder="/var/lib/gratia/tmp"
     LogFolder="/var/log/gratia"
 
-    SlurmDbHost="<%= scope.lookupvar('htcondorce::slurm_head_node') %>"
-    SlurmDbPort="3306"
-    SlurmDbUser="slurm"
-    SlurmDbPasswordFile="/etc/gratia/slurm/pwfile"
-    SlurmDbName="slurm_acct_db"
-    SlurmCluster="<%= scope.lookupvar('htcondorce::cluster_name') %>"
 
+    CondorScheddName=""
+      Comments91="Use this to set the name of the scheduler, if there are mutliple."
+    NoCertinfoBatchRecordsAreLocal="0"
+
+    SOAPHost="gratia-osg-prod.opensciencegrid.org:80"
 />
 
 <!-- This probe has not yet been configured -->
