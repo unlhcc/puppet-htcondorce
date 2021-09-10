@@ -17,7 +17,7 @@ class htcondorce::config {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/condor/config.d/99-local.conf',
+    source => 'puppet:///modules/htcondorce/condor/config.d/99-local.conf',
     notify  => Exec['condor_ce_reconfig'],
   }
 
@@ -28,7 +28,7 @@ class htcondorce::config {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/condor-ce/condor_mapfile',
+    source => 'puppet:///modules/htcondorce/condor-ce/condor_mapfile',
     notify  => Exec['condor_ce_reconfig'],
   }
 
