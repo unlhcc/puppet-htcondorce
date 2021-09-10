@@ -1,9 +1,8 @@
-;===================================================================
-;	DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
-; location = <%= scope.lookupvar('htcondorce::squid_server') %>
-; ProbeName="htcondor-ce:<%= @fqdn %>"
-; SiteName="<%= scope.lookupvar('htcondorce::resource_name') %>"
-;===================================================================
+<!--
+===================================================================
+ DO NOT EDIT DIRECTLY (MAINTAINED BY PUPPET)
+===================================================================
+-->
 
 <ProbeConfiguration
 
