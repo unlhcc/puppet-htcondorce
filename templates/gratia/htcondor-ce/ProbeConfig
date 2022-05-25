@@ -9,7 +9,7 @@
     Title1="Collector Information"
 
     CollectorHost="gratia-osg-prod.opensciencegrid.org:80"
-    SSLHost="gratia-osg-prod.opensciencegrid.org:80"
+    SSLHost="gratia-osg-prod.opensciencegrid.org:443"
     SSLRegistrationHost="gratia-osg-prod.opensciencegrid.org:80"
 
     CollectorService="/gratia-servlets/rmi"
@@ -23,17 +23,19 @@
     Grid="OSG"
     SuppressUnknownVORecords="0"
     SuppressNoDNRecords="1"
-    SuppressGridLocalRecords="1"
     QuarantineUnknownVORecords="1"
     EnableProbe="1"
 
     Title3="Tuning parameter"
 
     BundleSize="100"
+       Comments28="Number of records to be sent per envelope. Consider setting higher (up to 200)."
     MaxPendingFiles="100000"
     MaxStagedArchives="400"
+       Comments30="The maximum of backload files is MaxPendingFiles * MaxStagedArchives per probe"
     UseSyslog="0"
     ConnectionTimeout="900"
+       Comments31="Number of second GratiaCore will wait before timing out an attempt to connect or post to the Collector"
 
     LogLevel="2"
        Comments32="Controls debug messages printed to log file."
@@ -65,18 +67,21 @@
     UserVOMapFile="/var/lib/osg/user-vo-map"
         Comments51="Location and wildcard pattern of log files that contains certificate information about the jobs in the format followed by the 'blah demons'."
     CertInfoLogPattern="/var/log/accounting/blahp.log-*"
-    CondorCEHistoryFolder="/var/lib/gratia/data"
+    CondorCEHistoryFolder="/var/lib/gratia/condorce_data"
 
-    DataFolder="/var/lib/gratia/data/"
-    WorkingFolder="/var/lib/gratia/tmp"
-    LogFolder="/var/log/gratia"
 
+
+    DataFolder="/var/lib/condor-ce/gratia/data/"
+    WorkingFolder="/var/lib/condor-ce/gratia/tmp/"
+    LogFolder="/var/log/condor-ce/gratia/"
+
+    Lockfile="/var/lock/condor-ce/gratia.lock"
+
+    SuppressGridLocalRecords="1"
 
     CondorScheddName=""
       Comments91="Use this to set the name of the scheduler, if there are mutliple."
     NoCertinfoBatchRecordsAreLocal="0"
 
-    SOAPHost="gratia-osg-prod.opensciencegrid.org:80"
-/>
 
-<!-- This probe has not yet been configured -->
+/>
